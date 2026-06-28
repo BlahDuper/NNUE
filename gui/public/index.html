@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NNUE Chess Engine</title>
+    <meta name="description" content="Play against a custom NNUE chess engine with a beautiful web interface.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chessboard.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+    <!-- Our styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">♔</span>
+                <h1>NNUE Engine</h1>
+            </div>
+            <div class="header-controls">
+                <button id="btn-new-game" class="btn btn-primary">
+                    <span class="btn-icon">↻</span> New Game
+                </button>
+                <button id="btn-play-black" class="btn btn-primary">
+                    <span class="btn-icon">♟</span> Play as Black
+                </button>
+                <button id="btn-flip" class="btn btn-ghost">
+                    <span class="btn-icon">⇅</span> Flip Board
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Board Area -->
+            <div class="board-container">
+                <div id="board" class="board"></div>
+                <div id="game-status" class="game-status">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Your turn — play as White</span>
+                </div>
+            </div>
+
+            <!-- Side Panel -->
+            <aside class="side-panel">
+                <!-- Engine Settings -->
+                <div class="panel-card">
+                    <h2 class="panel-title">Engine Settings</h2>
+                    <div class="setting-group">
+                        <label for="think-time">Think Time</label>
+                        <div class="select-wrapper">
+                            <select id="think-time">
+                                <option value="1000">1 second</option>
+                                <option value="2000" selected>2 seconds</option>
+                                <option value="5000">5 seconds</option>
+                                <option value="10000">10 seconds</option>
+                                <option value="20000">20 seconds</option>
+                                <option value="30000">30 seconds</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engine Info -->
+                <div class="panel-card">
+                    <h2 class="panel-title">Engine Analysis</h2>
+                    <div class="engine-stats">
+                        <div class="stat">
+                            <span class="stat-label">Depth</span>
+                            <span id="stat-depth" class="stat-value">—</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Score</span>
+                            <span id="stat-score" class="stat-value">—</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Nodes</span>
+                            <span id="stat-nodes" class="stat-value">—</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">NPS</span>
+                            <span id="stat-nps" class="stat-value">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Move History -->
+                <div class="panel-card panel-card-grow">
+                    <h2 class="panel-title">Move History</h2>
+                    <div id="move-list" class="move-list">
+                        <span class="move-list-placeholder">Moves will appear here...</span>
+                    </div>
+                </div>
+
+                <!-- Captured Pieces -->
+                <div class="panel-card">
+                    <h2 class="panel-title">Captured</h2>
+                    <div class="captured-row">
+                        <span class="captured-label">White:</span>
+                        <span id="captured-white" class="captured-pieces"></span>
+                    </div>
+                    <div class="captured-row">
+                        <span class="captured-label">Black:</span>
+                        <span id="captured-black" class="captured-pieces"></span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

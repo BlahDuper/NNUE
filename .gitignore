@@ -1,0 +1,39 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+*.dll
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Datasets & Weights
+data/
+# We keep model/ in version control if they are small enough, but ignore large bins
+*.bin
+!model/nn-halfkp.bin
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
